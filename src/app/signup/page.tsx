@@ -1,11 +1,20 @@
 'use client';
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { authClient } from '@/lib/auth-client';
 
 interface FormData {
   username: string;
   email: string;
   password: string;
 }
+
+const { data, error } = await authClient.signUp.email({
+    name: FormData.username,
+    email: FormData.email,
+    password: FormData.password,
+    image: "https://example.com/image.png",
+    callbackURL: "https://example.com/callback",
+});
 
 export const SignupForm: React.FC = () => {
   const [formData, setFormData] = useState<FormData>({
